@@ -29,7 +29,7 @@ class Server():
         context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
         context.load_cert_chain('certificate.crt', 'private.key')
         self.app.run(
-            port=5000,
+            port=443,
             ssl_context=context,
             debug=True,
             host='0.0.0.0'
