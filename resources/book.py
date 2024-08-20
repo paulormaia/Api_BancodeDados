@@ -1,5 +1,5 @@
 from flask import request
-from flask_restplus import Resource, fields
+from flask_restx import Resource, fields
 
 from models.book import BookModel
 from schemas.book import BookSchema
@@ -14,7 +14,7 @@ ITEM_NOT_FOUND = "Book not found."
 book_schema = BookSchema()
 book_list_schema = BookSchema(many=True)
 
-# Model required by flask_restplus for expect
+# Model required by flask_restx for expect
 item = book_ns.model('Book', {
     'title': fields.String('Book title'),
     'pages': fields.Integer(0),
