@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, jsonify
+import ssl
 from flask_restx import Api
 from ma import ma
 from db import db
@@ -11,12 +12,14 @@ from server.instance import server
 api = server.api
 app = server.app
 
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+context.load_cert_chain('certificate.crt', 'private.key')
 
 @app.before_first_request
 def create_tables():
     db.create_all()
 
-
+api.add_resource
 @api.errorhandler(ValidationError)
 def handle_validation_error(error):
     return jsonify(error.messages), 400

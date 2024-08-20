@@ -1,5 +1,6 @@
 from flask import Flask, Blueprint
 from flask_restx import Api
+import ssl
 from ma import ma
 from db import db
 
@@ -25,8 +26,11 @@ class Server():
         return self.api.namespace(name='Books', description='book related operations', path='/')
 
     def run(self, ):
+        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+        context.load_cert_chain('certificate.crt', 'private.key')
         self.app.run(
             port=5000,
+            ssl_context=context,
             debug=True,
             host='0.0.0.0'
         )
